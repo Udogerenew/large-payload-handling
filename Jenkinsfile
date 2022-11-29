@@ -1,20 +1,20 @@
 pipeline {
-   agent any
-   stages {
-    stage('Checkout') {
-      steps {
-        script {
-           // The below will clone your repo and will be checked out to master branch by default.
-           git credentialsId: 'Udogerenew', url: 'https://github.com/Udogerenew/large-payload-handling.git'
-           // Do a ls -lart to view all the files are cloned. It will be clonned. This is just for you to be sure about it.
-           sh "ls -lart ./*" 
-           // List all branches in your repo. 
-           sh "git branch -a"
-           // Checkout to a specific branch in your repo.
-           sh "git checkout newbranch"
-	   sh "docker-compose -f docker-composetest.yaml up -d"
-          }
-       }
+    agent any 
+    stages {
+        stage('git-clone') { 
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'afe961f5-1351-4b38-895d-293f0386bf31', url: 'https://github.com/Udogerenew/large-payload-handling.git']]])
+            }
+        }
+        stage('Test') { 
+            steps {
+                sh 'docker --version'
+            }
+        }
+        stage('Deploy') { 
+            steps {
+                sh 'echo completed'
+            }
+        }
     }
-  }
 }

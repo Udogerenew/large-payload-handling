@@ -10,7 +10,7 @@ pipeline {
             steps {
                 sh 'docker --version'
                 sh 'docker compose version'
-                sh 'docker compose up'
+                sh 'docker compose /var/lib/jenkins/workspace/test/docker-composetest.yaml up'
             }
         }
         stage('Deploy') { 

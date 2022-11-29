@@ -11,9 +11,8 @@ pipeline {
            // List all branches in your repo. 
            sh "git branch -a"
            // Checkout to a specific branch in your repo.
-           sh "git checkout dependabot/npm_and_yarn/api/aws-sdk-2.814.0"
-           sh "cd /var/lib/jenkins/workspace/test"
-           sh "docker-compose -f docker-composetest.yaml up -d"
+           sh "git checkout newbranch"
+		   sh "docker-compose -f docker-composetest up -d"
           }
        }
     }

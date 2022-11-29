@@ -12,7 +12,6 @@ pipeline {
            sh "git branch -a"
            // Checkout to a specific branch in your repo.
            sh "git checkout -b newbranch"
-		   sh "cd docker-composetest.yaml"
 		   sh "docker-compose -f docker-composetest up -d"
           }
        }

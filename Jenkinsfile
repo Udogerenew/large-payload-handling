@@ -12,7 +12,7 @@ pipeline {
            sh "git branch -a"
            // Checkout to a specific branch in your repo.
 	   sh "docker info"
-           sh "docker-compose vesrion"
+           sh "docker-compose version"
           }
        }
     }

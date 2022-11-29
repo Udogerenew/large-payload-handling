@@ -9,7 +9,7 @@ pipeline {
         stage('Test') { 
             steps {
                 sh 'docker --version'
-                sh 'docker-compose -f docker-composetest.yml up -d'
+                sh 'docker compose create'
             }
         }
         stage('Deploy') { 

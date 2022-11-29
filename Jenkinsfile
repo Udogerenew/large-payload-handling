@@ -1,36 +1,20 @@
 pipeline {
-  agent any
-  stages {
-    stage("verify tooling") {
+   agent any
+   stages {
+    stage('Checkout') {
       steps {
-        sh '''
-          docker version
-          docker info
-          docker-compose --version 
-        '''
-      }
-    }
-    stage('Prune Docker data') {
-      steps {
-        sh 'docker system prune -a --volumes -f'
-      }
-    }
-    stage('Start container') {
-      steps {
-        sh 'docker compose up -d --no-color --wait'
-        sh 'docker compose ps'
-      }
-    }
-    stage('Run tests against the container') {
-      steps {
-        sh 'curl http://localhost:3000/param?query=demo | jq'
-      }
-    }
-  }
-  post {
-    always {
-      sh 'docker compose down --remove-orphans -v'
-      sh 'docker compose ps'
+        script {
+           // The below will clone your repo and will be checked out to master branch by default.
+           git credentialsId: 'Udogerenew', url: 'https://github.com/Udogerenew/large-payload-handling.git'
+           // Do a ls -lart to view all the files are cloned. It will be clonned. This is just for you to be sure about it.
+           sh "ls -lart ./*" 
+           // List all branches in your repo. 
+           sh "git branch -a"
+           // Checkout to a specific branch in your repo.
+           sh "git checkout dependabot/npm_and_yarn/api/aws-sdk-2.814.0"
+           sh "docker-compse -f docker-compose.yaml up -d"
+          }
+       }
     }
   }
 }

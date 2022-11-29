@@ -11,7 +11,8 @@ pipeline {
            // List all branches in your repo. 
            sh "git branch -a"
            // Checkout to a specific branch in your repo.
-		   sh "docker-compose -f docker-composetest up -d"
+		   sh "docker-compose --version"
+		   sh "docker info"
           }
        }
     }

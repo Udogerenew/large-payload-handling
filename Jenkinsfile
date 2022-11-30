@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('git-clone') { 
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '${CRED_ID}', url: 'https://github.com/Udogerenew/large-payload-handling.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'afe961f5-1351-4b38-895d-293f0386bf31', url: 'https://github.com/Udogerenew/large-payload-handling.git']]])
             }
         }
         stage('generate AFT report') {
@@ -17,7 +17,7 @@ pipeline {
 		alwaysLinkToLastBuild: false,
 		keepAll: true,
 		reportDir: "${workspace}",
-		reportFiles: "${report_append}_${pod_number}.test.html",
+		reportFiles: "test.html",
 		reportName: "AFT report"])
 		junit '**/*.xml'
             }

@@ -20,7 +20,8 @@ pipeline {
 		reportFiles: "${report_append}_${pod_number}.test.html",
 		reportName: "AFT report"])
 		junit '**/*.xml'
-        }							
+            }
+	}   	
         stage('Docker-compose') { 
             steps {
                 sh 'docker --version'
@@ -36,4 +37,3 @@ pipeline {
         }
     }
 }
-}	

@@ -19,18 +19,19 @@ pipeline {
 		reportDir: "${workspace}",
 		reportFiles: "/var/lib/jenkins/workspace/UbotJenkinsIntegeration_test_report_2022-11-25T09_00_15.html",
 		reportName: "Report"])
-		junit skipPublishingChecks: true, testResults: '**/*.xml'
+		junit  testResults: '**/*.xml'
             }
 	}   	
-        stage('Docker-compose') { 
-            steps {
-                sh 'docker --version'
-		sh 'printenv'
-                sh 'docker compose version'
-                sh 'docker compose -f /var/lib/jenkins/workspace/test/docker-composetest.yaml up'
-                sh 'docker ps -a'				
-            }
-        }
+//  skipPublishingChecks: true,
+//	    stage('Docker-compose') { 
+//            steps {
+//                sh 'docker --version'
+//		sh 'printenv'
+//              sh 'docker compose version'
+//                sh 'docker compose -f /var/lib/jenkins/workspace/test/docker-composetest.yaml up'
+//                sh 'docker ps -a'				
+//            }
+//      }
         stage('test') { 
             steps {
                 sh 'echo completed'

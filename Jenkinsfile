@@ -1,24 +1,25 @@
-// Define variable
-def URL = "https://github.com/Udogerenew/large-payload-handling.git"
-def credentialsId = "afe961f5-1351-4b38-895d-293f0386bf31"
-def branchname = "master"
-
-
-
-
 pipeline {
     agent any 
     environment {
-        BRANCH_NAME = 'master'
         CRED_ID = 'afe961f5-1351-4b38-895d-293f0386bf31'
-        URL = 'https://github.com/Udogerenew/large-payload-handling.git'
     }
     stages {
         stage('git-clone') { 
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '${CRED_ID}', url: '$URL']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '${CRED_ID}', url: 'https://github.com/Udogerenew/large-payload-handling.git']]])
             }
         }
+        stage('generate AFT report') {
+				//System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")
+				publishHTML (target: [
+				allowMissing: false,
+				alwaysLinkToLastBuild: false,
+				keepAll: true,
+				reportDir: "${workspace}",
+				reportFiles: "${report_append}_${pod_number}.test.html",
+				reportName: "AFT report"])
+				junit '**/*.xml'
+        }							
         stage('Docker-compose') { 
             steps {
                 sh 'docker --version'

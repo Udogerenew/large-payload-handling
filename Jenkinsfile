@@ -8,7 +8,6 @@ def branchname = "master"
 
 pipeline {
     agent any 
-    #agent {label 'node1'}
     stages {
         stage('git-clone') { 
             steps {

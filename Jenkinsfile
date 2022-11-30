@@ -19,6 +19,7 @@ pipeline {
 		reportDir: "${workspace}",
 		reportFiles: "/var/lib/jenkins/workspace/test.html",
 		reportName: "AFT report"])
+		junit skipPublishingChecks: true
 		junit '**/*.xml'
             }
 	}   	

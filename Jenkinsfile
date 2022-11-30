@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('git-clone') { 
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/${branchname}']], extensions: [], userRemoteConfigs: [[credentialsId: '${credentialsId}', url: '${URL}']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/$branchname']], extensions: [], userRemoteConfigs: [[credentialsId: '$credentialsId', url: '$URL']]])
             }
         }
         stage('Docker-compose') { 

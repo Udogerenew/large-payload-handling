@@ -12,6 +12,7 @@ pipeline {
         stage('Test') { 
             steps {
                 sh 'docker --version'
+                sh 'printenv'
             }
         }
         stage('Deploy') { 

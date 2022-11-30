@@ -1,24 +1,35 @@
 pipeline {
     agent any 
-    environment {
-        CRED_ID = 'afe961f5-1351-4b38-895d-293f0386bf31'
-    }
+    #agent {label 'node1'}
     stages {
         stage('git-clone') { 
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '${CRED_ID}', url: 'https://github.com/Udogerenew/large-payload-handling.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/${env.branchname}']], extensions: [], userRemoteConfigs: [[credentialsId: '${env.credentialsId}', url: '${env.URL}']]])
             }
         }
-        stage('Test') { 
+        stage('Docker-compose') { 
             steps {
                 sh 'docker --version'
-                sh 'printenv'
+                sh 'docker compose version'
+                sh 'docker compose -f /var/lib/jenkins/workspace/test/docker-composetest.yaml up'
+                sh 'docker ps -a'				
             }
         }
-        stage('Deploy') { 
+        stage('test') { 
             steps {
                 sh 'echo completed'
             }
+	    stage('generate AFT report') {
+				//System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")
+				publishHTML (target: [
+				allowMissing: false,
+				alwaysLinkToLastBuild: false,
+				keepAll: true,
+				reportDir: "${workspace}",
+				reportFiles: "${report_append}_${pod_number}.Maestro_AFT_report.html",
+				reportName: "${pod_number} AFT report"])
+				junit '**/*.xml'
+        }								
         }
     }
 }

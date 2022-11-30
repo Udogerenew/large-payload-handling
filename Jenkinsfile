@@ -11,7 +11,7 @@ pipeline {
     environment {
         BRANCH_NAME = 'master'
         CRED_ID = 'afe961f5-1351-4b38-895d-293f0386bf31'
-        URL = "https://github.com/Udogerenew/large-payload-handling.git"
+        URL = 'https://github.com/Udogerenew/large-payload-handling.git'
     }
     stages {
         stage('git-clone') { 

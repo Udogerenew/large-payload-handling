@@ -1,13 +1,11 @@
 version: '3'
 services:
-web:
-image: nginx
-db:
-image: mysql
-ports:
-- "3306:3306"
-environment:
-- MYSQL_ROOT_PASSWORD=password
-- MYSQL_USER=user
-- MYSQL_PASSWORD=password
-- MYSQL_DATABASE=demodb
+  nginx1:
+    image: nginx:1.20
+    container_name: nginx1
+    volumes:
+      - ./nginx1.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+    ports:
+      - 80:80
+      - 443:443

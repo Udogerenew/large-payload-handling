@@ -1,8 +1,8 @@
-version: '3'
+version: "3.9"
 services:
-  echo-server:
-    image: ealen/echo-server:latest
-    environment:
-      - ENABLE__ENVIRONMENT=false
+  web:
+    build: .
     ports:
-      - 3000:80
+      - "8000:5000"
+  redis:
+    image: "redis:alpine"

@@ -17,7 +17,7 @@ pipeline {
 		alwaysLinkToLastBuild: false,
 		keepAll: true,
 		reportDir: "${workspace}",
-		reportFiles: "test.html",
+		reportFiles: "/var/lib/jenkins/workspace/test.html",
 		reportName: "AFT report"])
 		junit '**/*.xml'
             }

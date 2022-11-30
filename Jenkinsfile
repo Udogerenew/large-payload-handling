@@ -10,15 +10,16 @@ pipeline {
             }
         }
         stage('generate AFT report') {
-				//System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")
-				publishHTML (target: [
-				allowMissing: false,
-				alwaysLinkToLastBuild: false,
-				keepAll: true,
-				reportDir: "${workspace}",
-				reportFiles: "${report_append}_${pod_number}.test.html",
-				reportName: "AFT report"])
-				junit '**/*.xml'
+	    steps {	
+		//System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")
+		publishHTML (target: [
+		allowMissing: false,
+		alwaysLinkToLastBuild: false,
+		keepAll: true,
+		reportDir: "${workspace}",
+		reportFiles: "${report_append}_${pod_number}.test.html",
+		reportName: "AFT report"])
+		junit '**/*.xml'
         }							
         stage('Docker-compose') { 
             steps {

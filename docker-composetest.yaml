@@ -1,8 +1,13 @@
-version: "3.9"
+version: '3'
 services:
-  web:
-    build: .
-    ports:
-      - "8000:5000"
-  redis:
-    image: "redis:alpine"
+web:
+image: nginx
+db:
+image: mysql
+ports:
+- "3306:3306"
+environment:
+- MYSQL_ROOT_PASSWORD=password
+- MYSQL_USER=user
+- MYSQL_PASSWORD=password
+- MYSQL_DATABASE=demodb

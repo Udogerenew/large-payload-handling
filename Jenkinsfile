@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('git-clone') { 
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/$"BRANCH_NAME"]], extensions: [], userRemoteConfigs: [[credentialsId: '${CRED_ID}', url: 'https://github.com/Udogerenew/large-payload-handling.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/$"BRANCH_NAME"']], extensions: [], userRemoteConfigs: [[credentialsId: '$"CRED_ID"', url: 'https://github.com/Udogerenew/large-payload-handling.git']]])
             }
         }
         stage('Test') { 

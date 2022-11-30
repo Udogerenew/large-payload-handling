@@ -17,8 +17,8 @@ pipeline {
 		alwaysLinkToLastBuild: false,
 		keepAll: true,
 		reportDir: "${workspace}",
-		reportFiles: "/var/lib/jenkins/workspace/test.html",
-		reportName: "AFT report"])
+		reportFiles: "/var/lib/jenkins/workspace/UbotJenkinsIntegeration_test_report_2022-11-25T09_00_15.html",
+		reportName: "Report"])
 		junit skipPublishingChecks: true, testResults: '**/*.xml'
             }
 	}   	

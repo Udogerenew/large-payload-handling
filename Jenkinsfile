@@ -25,6 +25,7 @@ pipeline {
         stage('Docker-compose') { 
             steps {
                 sh 'docker --version'
+		sh 'printenv'
                 sh 'docker compose version'
                 sh 'docker compose -f /var/lib/jenkins/workspace/test/docker-composetest.yaml up'
                 sh 'docker ps -a'				
